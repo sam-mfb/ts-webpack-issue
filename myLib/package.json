@@ -10,8 +10,9 @@
     "build": "npm run clean && npm run build-common && npm run build-node && npm run build-browser",
     "clean": "rimraf ./lib",
     "build-common": "tsc -p ./src/common/tsconfig.json",
-    "build-node": "tsc -p ./src/node/tsconfig.json",
-    "build-browser": "tsc -p ./src/browser/tsconfig.json"
+    "build-node": "tsc -p ./src/node/tsconfig.json && npm run clean-empty-common",
+    "build-browser": "tsc -p ./src/browser/tsconfig.json && npm run clean-empty-common",
+    "clean-empty-common": "rimraf ./lib/common"
   },
   "devDependencies": {
     "@types/node": "^14.17.6",
