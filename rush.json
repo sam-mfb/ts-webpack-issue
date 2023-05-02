@@ -421,6 +421,11 @@
        "projectFolder": "myLib",
        "reviewCategory": "production"
      },
+     {
+       "packageName": "my-app",
+       "projectFolder": "myApp",
+       "reviewCategory": "production"
+     }
     // 
     // {
     //   "packageName": "my-toolchain",
