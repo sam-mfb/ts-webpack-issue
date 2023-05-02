@@ -4,7 +4,7 @@ const commonConfig = {
   stats: {
     errorDetails: true
   },
-  mode: "production",
+  mode: "development",
   module: {
     rules: [
       {
@@ -27,6 +27,9 @@ const commonConfig = {
 
 const browserConfig = {
   ...commonConfig,
+  experiments: {
+    outputModule: true
+  },
   entry: { browser: "./src/browser/index.ts" },
   module: {
     rules: [
@@ -42,8 +45,7 @@ const browserConfig = {
     filename: "browser.js",
     path: path.resolve(__dirname) + "/lib",
     library: {
-      name: "my-lib",
-      type: "umd"
+      type: "module"
     },
     globalObject: "this"
   }
@@ -51,6 +53,9 @@ const browserConfig = {
 
 const nodeConfig = {
   ...commonConfig,
+  experiments: {
+    outputModule: true
+  },
   entry: {
     node: "./src/node/index.ts"
   },
@@ -58,9 +63,10 @@ const nodeConfig = {
   output: {
     filename: "node.js",
     path: path.resolve(__dirname) + "/lib",
+    chunkLoading: "import",
+    chunkFormat: "module",
     library: {
-      name: "my-lib",
-      type: "umd"
+      type: "module"
     },
     globalObject: "this"
   }
