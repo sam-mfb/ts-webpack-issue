@@ -15,38 +15,34 @@ const commonConfig = {
       }
     ]
   },
+  experiments: {
+    outputModule: true
+  },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
-    extensionAlias: {
+    alias: {
       ".js": [".ts", ".js"],
       ".jsx": [".tsx", ".jsx"],
       ".mjs": [".mts", ".mjs"]
     }
+  },
+  output: {
+    filename: "[name].js",
+    path: path.resolve(__dirname, "lib"),
+    library: {
+      name: "my-lib",
+      type: "module"
+    },
+    environment: {
+      module: true
+    },
+    chunkFormat: "module"
   }
 }
 
 const browserConfig = {
   ...commonConfig,
-  entry: { browser: "./src/browser/index.ts" },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: {
-          loader: "ts-loader"
-        }
-      }
-    ]
-  },
-  output: {
-    filename: "browser.js",
-    path: path.resolve(__dirname) + "/lib",
-    library: {
-      name: "my-lib",
-      type: "umd"
-    },
-    globalObject: "this"
-  }
+  entry: { browser: "./src/browser/index.ts" }
 }
 
 const nodeConfig = {
@@ -54,15 +50,7 @@ const nodeConfig = {
   entry: {
     node: "./src/node/index.ts"
   },
-  target: "node",
-  output: {
-    filename: "node.js",
-    path: path.resolve(__dirname) + "/lib",
-    library: {
-      name: "my-lib",
-      type: "umd"
-    },
-    globalObject: "this"
-  }
+  target: "node"
 }
+
 module.exports = [browserConfig, nodeConfig]

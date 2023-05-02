@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "type": "module",
   "description": "A library",
-  "main": "lib/node.js",
-  "browser": "lib/browser.js",
+  "main": "lib/node/index.js",
+  "browser": "lib/browser/index.js",
   "types": "lib/types.d.ts",
   "scripts": {
-    "build": "rimraf ./lib && webpack --config ./webpack.config.cjs && tsc -p ./src/common/tsconfig.json"
+    "build": "npm run clean && npm run build-common && npm run build-node && npm run build-browser",
+    "clean": "rimraf ./lib",
+    "build-common": "tsc -p ./src/common/tsconfig.json",
+    "build-node": "tsc -p ./src/node/tsconfig.json",
+    "build-browser": "tsc -p ./src/browser/tsconfig.json"
   },
   "devDependencies": {
     "@types/node": "^14.17.6",
