@@ -1,5 +1,3 @@
-// Copyright 2022 MFB Technologies, Inc.
-
 const path = require("path")
 
 const commonConfig = {
